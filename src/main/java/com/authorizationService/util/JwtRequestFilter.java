@@ -39,6 +39,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
+		String path = request.getRequestURI();
+		System.out.println(path);
+		if ("/api/authorization-service/manage/health".equals(path)) {
+			chain.doFilter(request, response);
+			return;
+		}
+
 		final String authorizationHeader = request.getHeader("Authorization");
 
 		String username = null;
