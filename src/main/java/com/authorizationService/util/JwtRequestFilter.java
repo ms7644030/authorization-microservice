@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +26,8 @@ import io.jsonwebtoken.UnsupportedJwtException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(JwtRequestFilter.class);
 
 	@Autowired
 	private MyUserDetailsService userDetailsService;
@@ -47,6 +51,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 			} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException
 					| IllegalArgumentException e) {
 
+				LOGGER.info("Invalid jwt token !!!");
+
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token expired");
 
 			}
@@ -66,9 +72,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 							.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 
+					LOGGER.info("Authentication Successful !!!");
+
 				}
 			} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException
 					| IllegalArgumentException e) {
+
+				LOGGER.info("Invalid jwt token !!!");
 
 				response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token expired");
 
