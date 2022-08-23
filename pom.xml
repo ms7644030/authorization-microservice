@@ -100,7 +100,7 @@
 				</executions>
 				<configuration>
 					<!--<repository>pensionmanagement/${project.name}</repository> -->
-					<repository>ms7644030/authorization-service</repository>
+					<repository>authorization-service</repository>
 					<tag>${project.version}</tag>
 					<skipDockerInfo>true</skipDockerInfo>
 				</configuration>
