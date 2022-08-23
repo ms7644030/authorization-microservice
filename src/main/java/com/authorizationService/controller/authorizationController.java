@@ -36,6 +36,8 @@ public class authorizationController {
 	@GetMapping("/validate")
 	public String isValid() {
 
+		LOGGER.info("Received Request to validate");
+
 		return "valid";
 
 	}
@@ -45,13 +47,12 @@ public class authorizationController {
 			throws Exception {
 
 		try {
-			LOGGER.info("Received Request for user authentication, user : ", authenticationRequest.getUsername());
+			LOGGER.info("Received Request for user authentication");
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 					authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 		} catch (BadCredentialsException e) {
 
-			LOGGER.info("Autentication failed(Incorrect username or password), user : ",
-					authenticationRequest.getUsername());
+			LOGGER.info("Autentication failed (Incorrect username or password)");
 			throw new Exception("Incorrect username or password", e);
 		}
 
