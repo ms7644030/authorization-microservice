@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +20,7 @@ import com.authorizationService.util.AuthenticationResponse;
 import com.authorizationService.util.JwtUtil;
 
 @RestController
-//@CrossOrigin(origins="*")
+@CrossOrigin(origins = "*")
 public class authorizationController {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(authorizationController.class);
