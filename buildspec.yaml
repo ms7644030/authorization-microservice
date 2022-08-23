@@ -1,15 +1,18 @@
-version: 0.2
 
+version: 0.2
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws --version
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 555918697305.dkr.ecr.us-west-2.amazonaws.com
-      - REPOSITORY_URI=555918697305.dkr.ecr.us-west-2.amazonaws.com/pms-authorization-microservice
-      - CONTAINER_NAME=authorization-service
-      - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
-      - IMAGE_URI=${REPOSITORY_URI}:${TAG}
+    - echo Logging in to Amazon ECR...
+    - aws --version
+    - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 555918697305.dkr.ecr.us-west-2.amazonaws.com
+    - REPOSITORY_URI=555918697305.dkr.ecr.us-west-2.amazonaws.com/pms-authorization-microservice
+    - CONTAINER_NAME=authorization-service
+    - TAG="$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | head -c 8)"
+    - IMAGE_URI=${REPOSITORY_URI}:${TAG}
   build:
     commands:
     - echo Build started on `date`
@@ -28,3 +31,5 @@ phases:
 artifacts:
   files:
   - imagedefinitions.json
+
+  
