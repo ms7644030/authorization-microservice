@@ -3,7 +3,7 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: "arn:aws:ecs:us-west-2:555918697305:task-definition/authorization-microservice-task:1"
+        TaskDefinition: "arn:aws:ecs:us-west-2:555918697305:task-definition/authorization-microservice-task:5"
         LoadBalancerInfo:
           ContainerName: "authorization-service"
           ContainerPort: "8088"
